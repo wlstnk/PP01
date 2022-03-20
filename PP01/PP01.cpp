@@ -1,10 +1,25 @@
 ﻿#include <iostream>
-using namespace std;
+#include <string>
+
+namespace normal {
+	void printf(std::string str)
+	{
+		std::cout << str;
+	}
+}
+
+namespace visual_novel {
+	void printf(std::string str)
+	{
+		std::cout << "박진수 " << str;
+	}
+
+}
+
+using namespace visual_novel;
 
 int main()
 {
-	int a=2, b=3;
-	cout << a + b;
-
+	printf("바보");
 	return 0;
 }
