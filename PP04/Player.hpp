@@ -1,25 +1,35 @@
-class Player
+#pragma once
+#include "GameObject.hpp"
+class Player : public GameObject
 {
 public : 
-	int x, y;
 	Player()
 	{
-		x = 20;
-		y = 7;
 	}
 	~Player()
 	{
 
 	}
 
+public:
+	void Initialize()
+	{
+		mesh = "P";
+		position.SetPosition(20,7);
+	}
+	void Update()
+	{
+	}
+
+public:
 	void isKeyPressed()
 	{
-		y = 5;
+		position.y = 5;
 	}
 
 	void isKeyUnpressed()
 	{
-		y = 7;
+		position.y = 7;
 	}
 
 };

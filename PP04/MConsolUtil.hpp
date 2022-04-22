@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <Windows.h>
+#include "Vector2.hpp"
 
 using namespace std;
 
@@ -13,9 +14,9 @@ namespace MuSeoun_Engine
 		MConsoleRenderer() { SetCursorState(false); }
 		~MConsoleRenderer() {}
 
-		void MoveCursor(short x, short y)
+		void MoveCursor(Vector2 pos)
 		{
-			COORD position = { x , y };
+			COORD position = { pos.x , pos.y };
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
 		}
 

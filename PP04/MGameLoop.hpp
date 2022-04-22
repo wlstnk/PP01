@@ -3,6 +3,9 @@
 #include <thread>
 #include "MConsolUtil.hpp"
 #include "Player.hpp"
+#include "Monster.hpp"
+#include "GameObjectManager.hpp"
+#include <queue>
 
 using namespace std;
 
@@ -15,7 +18,8 @@ namespace MuSeoun_Engine
 		MConsoleRenderer cRenderer;
 		chrono::system_clock::time_point startRenderTimePoint;
 		chrono::duration<double> renderDuration;
-		Player p;
+		GameObjectManager GOManager;
+		Vector2 fpsDrawPosition;
 		
 	public :
 		MGameLoop() 	{	_isGameRunning = false;		}
@@ -45,7 +49,8 @@ namespace MuSeoun_Engine
 	private :
 		void Initialize()
 		{
-			
+			GOManager.Initialize();
+			fpsDrawPosition.SetPosition(10,20);
 		}
 		void Release() 
 		{
@@ -55,36 +60,43 @@ namespace MuSeoun_Engine
 		{
 			if (GetAsyncKeyState(VK_SPACE) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8001)
 			{ 
-				p.isKeyPressed();
+				GOManager.GetPlayer()->isKeyPressed();
 			}
 			else 
 			{
-				p.isKeyUnpressed();
+				GOManager.GetPlayer()->isKeyUnpressed();
 			}
 
 		}
 		void Update()
 		{
-			
+			GOManager.Update();
 		}
 		void Render()
 		{
-			
+
 			cRenderer.Clear();
-			
 
-			cRenderer.MoveCursor(p.x, p.y);
-			cRenderer.DrawString("P");
+			//cRenderer.MoveCursor(GOManager.GetPlayer()->position);
+			//cRenderer.DrawString(GOManager.GetPlayer()->mesh);
+			
+			for (int i = 0; i < GOManager.keyPoint; i++)
+			{
+				if (GOManager.gameObjectList[i] != nullptr)
+				{
+					cRenderer.MoveCursor(GOManager.gameObjectList[i]->position);
+					cRenderer.DrawString(GOManager.gameObjectList[i]->mesh);
+				}
+			}
 			
 			
-			cRenderer.MoveCursor(10, 20);
-
-
+			//Draw FPS
+			cRenderer.MoveCursor(fpsDrawPosition);
 			renderDuration = chrono::system_clock::now() - startRenderTimePoint;
 			startRenderTimePoint = chrono::system_clock::now();
 			string fps = "FPS : " + to_string(1.0 / renderDuration.count());
-			cRenderer.DrawString(fps);
-
+			cRenderer.DrawString(to_string(GOManager.keyPoint));
+			//cRenderer.DrawString(fps);
 			this_thread::sleep_for(chrono::milliseconds(20));
 		}
 
