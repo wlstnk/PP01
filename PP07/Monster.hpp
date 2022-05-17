@@ -1,26 +1,37 @@
 #pragma once
 #include "Color.hpp"
+#include "BoxCollider.hpp"
+#include "Vector2.hpp"
 namespace Engine
 {
 
 	class Monster
 	{
 	public:
-		Monster() { color.SetColor(240, 0, 0); }
-		Monster(double x, double y) { this->x = x; this->y=y; color.SetColor(255, 0, 0);
-		}
+		Monster() { Initialize(0, 0); }
+		Monster(double x, double y) { Initialize(x, y); }
 		~Monster() {}
 	public:
-		double x;
-		double y;
+		Vector2 position;
 		Color color;
+		BoxCollider collider;
+
 		double speed = 2.0;
-		bool isDestroy=false;
+		bool isDestroy = false;
 	public:
+		void Initialize(double x,double y)
+		{
+			position.SetPosition(x, y);
+			collider.Initialize(0.02f);
+			collider.SetCollider(position);			
+			color.SetColor(255, 0, 0);
+		}
 		void Update() 
 		{
-			x = x - speed;
-			if (x < -80) { isDestroy = true; }
+			position.x = position.x - speed;
+			if (position.x < -80) { isDestroy = true; }
 		}
+	public:
+
 	};
 }

@@ -4,6 +4,7 @@
 #pragma comment(lib,"OpenGL32")
 
 #include "Color.hpp"
+#include "Vector2.hpp"
 
 namespace Engine
 {
@@ -48,8 +49,11 @@ namespace Engine
 			exit(EXIT_SUCCESS);
 		}
 
-		void DrawSquare(double x, double y, double size, Color color)
+		void DrawSquare(Vector2 position, double size, Color color)
 		{
+			double x = position.x / 100;
+			double y = position.y / 100;
+
 			glPointSize(10);
 			glBegin(GL_TRIANGLES);
 			glColor3f(color.r, color.g, color.b);
@@ -65,8 +69,11 @@ namespace Engine
 			glVertex2d(x - size, y - size);
 			glEnd();
 		}
-		void DrawTriangle(double x, double y, double size, Color color)
+		void DrawTriangle(Vector2 position, double size, Color color)
 		{
+			double x = position.x / 100;
+			double y = position.y / 100;
+
 			glPointSize(10);
 			glBegin(GL_TRIANGLES);
 			glColor3f(color.r, color.g, color.b);

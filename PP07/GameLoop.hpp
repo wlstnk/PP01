@@ -64,11 +64,11 @@ namespace Engine
 		{
 			if (GetAsyncKeyState(VK_SPACE) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8001)
 			{
-				p.isKeyPressed();
+				p.IsKeyPressed();
 			}
 			else
 			{
-				p.isKeyUnpressed();
+				p.IsKeyUnpressed();
 			}
 
 		}
@@ -83,19 +83,22 @@ namespace Engine
 			for(int i=0;i<m_monsters.size();i++)
 			{
 				m_monsters[i].Update();
+				if(m_monsters[i].collider.ColliderCheck(p.collider))
+				{
+					std::cout << "check";
+				}
 				if(m_monsters[i].isDestroy){m_monsters.erase(m_monsters.begin() + i);}
 			}
 		}
 		void Render()
 		{
 			m_windowManager.RenderStart();
-			m_windowManager.DrawSquare(p.x/100,p.y/100,0.03f,p.color);
+			m_windowManager.DrawSquare(p.position,0.03f,p.color);
 
 
 			for (int i = 0; i < m_monsters.size(); i++)
 			{
-				m_windowManager.DrawTriangle(m_monsters[i].x / 100, m_monsters[i].y / 100, 0.02f,m_monsters[i].color);
-				
+				m_windowManager.DrawTriangle(m_monsters[i].position, 0.02f,m_monsters[i].color);
 			}
 
 			m_windowManager.RenderEnd();

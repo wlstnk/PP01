@@ -149,10 +149,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoxCollider.hpp" />
     <ClInclude Include="Color.hpp" />
     <ClInclude Include="GameLoop.hpp" />
     <ClInclude Include="Monster.hpp" />
     <ClInclude Include="Player.hpp" />
+    <ClInclude Include="Vector2.hpp" />
     <ClInclude Include="WindowManager.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
