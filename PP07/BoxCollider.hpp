@@ -7,10 +7,10 @@ namespace Engine
 	public:
 		double size;
 
-		Vector2 lb;
-		Vector2 rt;
-		Vector2 lt;
-		Vector2 rb;
+		double left;
+		double right;
+		double bottom;
+		double top;
 
 	public:
 		void Initialize(double size)
@@ -19,42 +19,20 @@ namespace Engine
 		}
 		void SetCollider(Vector2 position)
 		{
-			lb.SetPosition(position.x - size, position.y - size);
-			rt.SetPosition(position.x + size, position.y + size);
-			lt.SetPosition(position.x - size, position.y + size);
-			rb.SetPosition(position.x + size, position.y - size);
+			left = position.x - size;
+			right = position.x + size;
+			bottom = position.y - size;
+			top = position.y + size;
+			
+			/*lt.SetPosition(position.x - size, position.y + size);
+			rb.SetPosition(position.x + size, position.y - size);*/
 		}
-		bool ColliderCheck(BoxCollider other) 
+		bool static ColliderCheck(BoxCollider a,BoxCollider b) 
 		{
-			if (lb < other.lb)
-			{
-				if (rt > other.lb)
-				{
-					return true;
-				}
-			}
-			if (lb < other.lt)
-			{
-				if (rt > other.lt)
-				{
-					return true;
-				}
-			}
-			if (lb < other.rb)
-			{
-				if (rt > other.rb)
-				{
-					return true;
-				}
-			}
-			if (lb < other.rt)
-			{
-				if (rt > other.rt)
-				{
-					return true;
-				}
-			}
-			return false;
+			return a.right > b.left
+				&& a.left < b.right
+				&& a.top > b.bottom
+				&& a.bottom < b.top;
 		}
 
 	};

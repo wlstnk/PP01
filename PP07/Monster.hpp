@@ -1,26 +1,20 @@
 #pragma once
-#include "Color.hpp"
-#include "BoxCollider.hpp"
-#include "Vector2.hpp"
+#include "GameObject.hpp"
 namespace Engine
 {
 
-	class Monster
+	class Monster : public GameObject
 	{
 	public:
-		Monster() { Initialize(0, 0); }
-		Monster(double x, double y) { Initialize(x, y); }
+		Monster() { Init(0, 0); }
+		Monster(double x, double y) { Init(x, y); }
 		~Monster() {}
 	public:
-		Vector2 position;
-		Color color;
-		BoxCollider collider;
-
 		double speed = 2.0;
-		bool isDestroy = false;
 	public:
-		void Initialize(double x,double y)
+		void Init(double x,double y)
 		{
+			type = Type::MONSTER;
 			position.SetPosition(x, y);
 			collider.Initialize(0.02f);
 			collider.SetCollider(position);			
@@ -30,8 +24,10 @@ namespace Engine
 		{
 			position.x = position.x - speed;
 			if (position.x < -80) { isDestroy = true; }
+			collider.SetCollider(position);
 		}
 	public:
+		void OnCollisionEnter() { std::cout << "m_hit"; }
 
 	};
 }

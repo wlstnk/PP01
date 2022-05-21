@@ -42,6 +42,28 @@ namespace Engine
 			}
 			return false;
 		}
+		bool operator<=(Vector2& other)
+		{
+			if (x <= other.x)
+			{
+				if (y <= other.y)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		bool operator>=(Vector2& other)
+		{
+			if (x >= other.x)
+			{
+				if (y >= other.y)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 
 	};
 }

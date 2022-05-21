@@ -10,6 +10,7 @@
 #include "WindowManager.hpp"
 #include "Player.hpp"
 #include "Monster.hpp"
+#include "BoxCollider.hpp"
 
 using namespace std;
 
@@ -24,6 +25,7 @@ namespace Engine
 		Player p;
 		std::vector<Monster> m_monsters;
 		int m_monsterCreateframe = 100;
+		std::vector<GameObject> m_gameObjects;
 		
 
 	public:
@@ -39,6 +41,7 @@ namespace Engine
 			{
 				Input();
 				Update();
+				ColliderCheck();
 				Render();
 				
 			}
@@ -54,6 +57,7 @@ namespace Engine
 		void Initialize()
 		{
 			m_windowManager.Initialize();
+			m_gameObjects.push_back(Player());
 		}
 		void Release()
 		{
@@ -83,11 +87,22 @@ namespace Engine
 			for(int i=0;i<m_monsters.size();i++)
 			{
 				m_monsters[i].Update();
-				if(m_monsters[i].collider.ColliderCheck(p.collider))
-				{
-					std::cout << "check";
-				}
 				if(m_monsters[i].isDestroy){m_monsters.erase(m_monsters.begin() + i);}
+			}
+		}
+		void ColliderCheck()
+		{
+			for(int i =0; i<m_gameObjects.size(); i++)
+			{
+				for (int j = 0; j < m_gameObjects.size(); j++)
+				{
+					if (i == j) { break; }
+					if(BoxCollider::ColliderCheck(m_gameObjects[0].collider, m_gameObjects[1].collider))
+					{
+						m_gameObjects[i].OnCollisionEnter();
+						m_gameObjects[j].OnCollisionEnter();
+					}
+				}
 			}
 		}
 		void Render()

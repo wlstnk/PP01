@@ -1,31 +1,32 @@
 #pragma once
-#include "Color.hpp"
-#include "Vector2.hpp"
-#include "BoxCollider.hpp"
+#include "GameObject.hpp"
 namespace Engine
 {
 
-	class Player
+	class Player : public GameObject
 	{
 	public:
-		Player() { Initialize(); }
+		Player() { Init(0, 0); }
+		Player(double x,double y) { Init(x, y); }
 		~Player() {}
-
 	public:
-		Vector2 position;
-		Color color;
-		BoxCollider collider;
-	public:
-		void Initialize()
+		void Init(double x,double y)
 		{
+			type = Type::PLAYER;
 			position.SetPosition(0, 0);
 			collider.Initialize(0.03f);
 			collider.SetCollider(position);
 			color.SetColor(207, 255, 229);
 		}
-		void Update() {}
+		void Update() 
+		{
+			collider.SetCollider(position);
+		
+		}
 	public:
 		void IsKeyPressed() { position.y = 20.0; }
 		void IsKeyUnpressed() { position.y = 0.0; }
+	public:
+		void OnCollisionEnter() { std::cout << "p_hit"; }
 	};
 }
