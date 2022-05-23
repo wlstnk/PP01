@@ -1,0 +1,6 @@
+﻿  main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': 매크로 재정의
+C:\Git\PP01-master\packages\glfw.3.3.7\build\native\include\GLFW\glfw3.h(123): message : 'APIENTRY'의 이전 정의를 참조하십시오.
+C:\Git\PP01-master\PP07\GameLoop.hpp(83,17): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Git\PP01-master\PP07\GameLoop.hpp(95,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  PP07.vcxproj -> C:\Git\PP01-master\Debug\PP07-GLFW.exe

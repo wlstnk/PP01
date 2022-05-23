@@ -69,6 +69,24 @@ namespace Engine
 			glVertex2d(x - size, y - size);
 			glEnd();
 		}
+		void DrawSquare(double left, double right,double top,double bottom, Color color)
+		{
+
+			glPointSize(10);
+			glBegin(GL_TRIANGLES);
+			glColor4f(color.r, color.g, color.b,0.5f);
+			glVertex2d(left, bottom);
+			glVertex2d(left, top);
+			glVertex2d(right, top);
+			glEnd();
+
+			glBegin(GL_TRIANGLES);
+			glColor4f(color.r, color.g, color.b,0.5f);
+			glVertex2d(right, bottom);
+			glVertex2d(right, top);
+			glVertex2d(left, bottom);
+			glEnd();
+		}
 		void DrawTriangle(Vector2 position, double size, Color color)
 		{
 			double x = position.x / 100;
@@ -76,7 +94,7 @@ namespace Engine
 
 			glPointSize(10);
 			glBegin(GL_TRIANGLES);
-			glColor3f(color.r, color.g, color.b);
+			glColor4f(color.r, color.g, color.b,0.5f);
 			glVertex2d(x - size, y);
 			glVertex2d(x + size, y + size);
 			glVertex2d(x + size, y - size);
@@ -85,6 +103,8 @@ namespace Engine
 		////////////////////////////
 		void RenderStart()
 		{
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 		}

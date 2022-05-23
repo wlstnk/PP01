@@ -16,7 +16,7 @@ namespace Engine
 		{
 			type = Type::MONSTER;
 			position.SetPosition(x, y);
-			collider.Initialize(0.02f);
+			collider.Initialize(3);
 			collider.SetCollider(position);			
 			color.SetColor(255, 0, 0);
 		}
@@ -27,7 +27,7 @@ namespace Engine
 			collider.SetCollider(position);
 		}
 	public:
-		void OnCollisionEnter() { std::cout << "m_hit"; }
+		void OnCollisionEnter() { std::cout << "\n\nm_hit\n\n"; }
 
 	};
 }

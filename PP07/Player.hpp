@@ -10,11 +10,13 @@ namespace Engine
 		Player(double x,double y) { Init(x, y); }
 		~Player() {}
 	public:
+		double m_speed = 1 ;
+	public:
 		void Init(double x,double y)
 		{
 			type = Type::PLAYER;
 			position.SetPosition(0, 0);
-			collider.Initialize(0.03f);
+			collider.Initialize(3);
 			collider.SetCollider(position);
 			color.SetColor(207, 255, 229);
 		}
@@ -24,9 +26,30 @@ namespace Engine
 		
 		}
 	public:
-		void IsKeyPressed() { position.y = 20.0; }
-		void IsKeyUnpressed() { position.y = 0.0; }
+		void IsKeyPressed(Key key)
+		{ 
+			switch (key)
+			{
+			case Key::W:
+				position.y += m_speed;
+				break;
+			case Key::S:
+				position.y -= m_speed;
+				break;
+			case Key::A:
+				position.x -= m_speed;
+				break;
+			case Key::D:
+				position.x += m_speed;
+				break;
+			default:
+				break;
+			}
+		}
+		void IsKeyUnpressed(Key key) 
+		{ 
+		}
 	public:
-		void OnCollisionEnter() { std::cout << "p_hit"; }
+		void OnCollisionEnter() {}
 	};
 }
